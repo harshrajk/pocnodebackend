@@ -1,22 +1,25 @@
 const express = require("express");
 const app = express();
 const port = 3001;
+const cors = require('cors');
 
 const db = require('./services/db');
 
 
-app.use((req, res, next) => {
-  // Allow requests from your React app's origin (http://localhost:3000)
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // Allow certain HTTP methods
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  // Allow specific headers
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  // Allow cookies to be included in requests (if needed)
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  // Continue with the next middleware/route
-  next();
-});
+
+app.use(cors());
+// app.use((req, res, next) => {
+//   // Allow requests from your React app's origin (http://localhost:3000)
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//   // Allow certain HTTP methods
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   // Allow specific headers
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   // Allow cookies to be included in requests (if needed)
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   // Continue with the next middleware/route
+//   next();
+// });
 
 app.use(express.static('public'));
 app.use('/assets', express.static('assets'));
